@@ -1,1 +1,8 @@
-/*# sourceMappingURL=style.css.map */
+* {
+  padding: 0;
+  margin: 0;
+}
+
+html, body {
+  background: url(../img/kitty.png);
+}/*# sourceMappingURL=style.css.map */

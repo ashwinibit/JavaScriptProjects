@@ -77,13 +77,10 @@ body {
   margin: 0 2rem;
 }
 .projects .project {
-  display: flex;
-  align-items: flex-start;
-  flex-wrap: wrap;
-  padding: 50px 0;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
 }
 .projects .project .project-item {
-  flex-basis: calc(33.33333% - 30px);
   margin: 0 15px 30px;
   overflow: hidden;
   border-radius: 28px;
@@ -95,6 +92,7 @@ body {
   background-color: var(--color-grey-6);
   overflow: hidden;
   position: relative;
+  text-align: center;
 }
 .projects .project .project-item .project-item-link:hover {
   color: #FFF;
@@ -103,8 +101,8 @@ body {
   transform: scale(10);
 }
 .projects .project .project-item .project-item-link .project-item-title {
-  min-height: 87px;
-  margin: 0 0 25px;
+  min-height: 90px;
+  margin-top: 50px;
   overflow: hidden;
   font-weight: bold;
   font-size: 30px;
