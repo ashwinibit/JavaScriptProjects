@@ -8,16 +8,19 @@
     <title>Quote Generater</title>
 </head>
 <body onload="quotesFetch()">
+    <div class="loader" id="loader">
+    </div>
     
     <div class="main">
-        <div class="content">
-            <div class="quote">
-                This is a temprory quote to test the data
-                <div class="qouteBy">
-                    :AKM
-                </div>
+        <div class="content" id="content">
+            <div class="quote" id="quote">
+                
+            
             </div>
-            <button>Generate Quote</button>
+            <div class="qouteBy" id="qouteBy">
+
+            </div>
+            <button id="newQuote">Generate Quote</button>
         </div>
     </div>
 

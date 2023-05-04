@@ -17,20 +17,25 @@ html, body {
   height: 100vh;
 }
 .main .content {
+  visibility: hidden;
   background: rgb(2, 201, 137);
-  background: linear-gradient(315deg, rgba(2, 201, 137, 0.4976190305) 0%, rgba(23, 69, 70, 0.5032212714) 35%);
+  background: linear-gradient(315deg, rgb(238, 156, 167) 0%, rgba(255, 221, 225, 0.8) 35%);
   min-width: 80%;
   text-align: center;
   border-radius: 25px;
 }
 .main .content .quote {
-  font-size: 40px;
+  font-size: 2rem;
   margin-top: 30px;
   margin-left: 10%;
   margin-right: 10%;
 }
-.main .content .quote .qouteBy {
+.main .content .qouteBy {
+  font-size: 2rem;
+  margin-left: 10%;
+  margin-right: 10%;
   margin-top: 20px;
+  text-align: end;
 }
 .main .content button {
   width: 50%;
@@ -43,4 +48,19 @@ html, body {
   border-radius: 25px;
   font-family: "Caveat", cursive;
   font-family: "Dancing Script", cursive;
+}
+
+.loader {
+  background: url(../img/beautiful-love.gif);
+  position: absolute;
+  top: 46%;
+  left: 46%;
+  height: 120px;
+  width: 120px;
+  background-size: contain;
+  background-repeat: no-repeat;
+}
+
+.hide-loader {
+  display: none;
 }/*# sourceMappingURL=style.css.map */
