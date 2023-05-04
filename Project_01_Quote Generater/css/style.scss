@@ -6,7 +6,8 @@
 }
 
 html, body{
-    background: url(../img/kitty.png);
+    // background: url(../img/kitty.png);
+    background-color: #191d2b;
     transition: all .4s ease-in-out;
     font-family: 'Caveat', cursive;
     font-family: 'Dancing Script', cursive;
@@ -20,7 +21,7 @@ html, body{
         visibility: hidden;
         background: rgb(2,201,137);
         background: linear-gradient(315deg, rgb(238, 156, 167) 0%, rgba(255, 221, 225, 0.8) 35%);
-        min-width: calc(80%);
+        max-width: calc(80%);
         text-align: center;
         border-radius: 25px;
         
@@ -42,6 +43,7 @@ html, body{
         }
 
         button{
+            // background-color: ;
             width: calc(50%);
             padding: 10px;
             margin-top: 30px;
@@ -53,6 +55,11 @@ html, body{
             // transition: all .4s ease-in-out;
             font-family: 'Caveat', cursive;
             font-family: 'Dancing Script', cursive;
+
+            &:hover{
+                background-color: #34e97fa9;
+                transition: all .4s ease-in-out;
+            }
         }
     }
 
@@ -65,9 +72,11 @@ html, body{
     top: 46%;
     left: 46%;
     height: 120px;
-    width: 120px;
+    width: 90px;
     background-size: contain;
     background-repeat: no-repeat;
+    border-radius: 11px;
+    opacity: 0.7;
 
     
  }

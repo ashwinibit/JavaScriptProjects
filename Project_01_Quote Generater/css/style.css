@@ -5,7 +5,7 @@
 }
 
 html, body {
-  background: url(../img/kitty.png);
+  background-color: #191d2b;
   transition: all 0.4s ease-in-out;
   font-family: "Caveat", cursive;
   font-family: "Dancing Script", cursive;
@@ -20,7 +20,7 @@ html, body {
   visibility: hidden;
   background: rgb(2, 201, 137);
   background: linear-gradient(315deg, rgb(238, 156, 167) 0%, rgba(255, 221, 225, 0.8) 35%);
-  min-width: 80%;
+  max-width: 80%;
   text-align: center;
   border-radius: 25px;
 }
@@ -49,6 +49,10 @@ html, body {
   font-family: "Caveat", cursive;
   font-family: "Dancing Script", cursive;
 }
+.main .content button:hover {
+  background-color: rgba(52, 233, 127, 0.662745098);
+  transition: all 0.4s ease-in-out;
+}
 
 .loader {
   background: url(../img/beautiful-love.gif);
@@ -56,9 +60,11 @@ html, body {
   top: 46%;
   left: 46%;
   height: 120px;
-  width: 120px;
+  width: 90px;
   background-size: contain;
   background-repeat: no-repeat;
+  border-radius: 11px;
+  opacity: 0.7;
 }
 
 .hide-loader {
