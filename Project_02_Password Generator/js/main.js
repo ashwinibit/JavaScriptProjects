@@ -9,9 +9,13 @@ function generatePassword(){
         var randomNumber = Math.floor(Math.random() * chars.length);
         password += chars.substring(randomNumber, randomNumber +1);
     }
-    document.getElementById("").value = password;
+    document.getElementById("passwordField").value = password;
 }
 
 function copyPassword(){
-    
+    document.getElementById("passwordField").select();
+    document.execCommand('copy');
 }
+
+document.getElementById('generatePassword').addEventListener('click', generatePassword)
+document.getElementById('copyPassword').addEventListener('click', copyPassword)

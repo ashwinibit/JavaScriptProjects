@@ -1,0 +1,57 @@
+@import url('https://fonts.googleapis.com/css2?family=Caveat&family=Dancing+Script&display=swap');
+
+*{
+    margin: 0;
+    padding: 0;
+}
+:root{
+    --color-1: #86f4b4;
+}
+
+
+body{
+
+    background-color: var(--color-1);
+    height: 100vh;
+    transition: all .4s ease-in-out;
+    font-family: 'Caveat', cursive;
+    font-family: 'Dancing Script', cursive;
+    display: grid;
+    place-items: center;
+}
+
+main{
+    width: calc(50%);
+    // height: 100px;
+    background: linear-gradient(135deg, hsla(53, 84%, 74%, 1) 0%, hsla(336, 87%, 61%, 1) 50%, hsla(262, 81%, 71%, 1) 100%);
+
+    border-radius: 25px;
+    display: inherit;
+    place-items: center;
+    padding: 1rem;
+    span{
+        color: white;
+        font-size: 40px;
+        padding-bottom: 1rem;
+        text-align: center;
+    }
+    input{
+        height: 2rem;
+        width: calc(70%);
+        border-radius: 10px;
+        // margin-bottom: 1rem;
+    }
+    .buttonContainer{
+        display: grid;
+        width: calc(100%);
+        place-items: center;
+        button{
+            padding: 0.8rem;
+            font-size: 20px;
+            border: none;
+            margin: 10px;
+            border-radius: 10px;
+        }
+    }
+}
+
