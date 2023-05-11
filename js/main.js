@@ -1,3 +1,5 @@
+
+
 const listOfProjects = ['Project_01_Quote Generater','Project_02_Password Generator','Project_03_Timer']
 
 for (let i = 0; i<listOfProjects.length;i++){
