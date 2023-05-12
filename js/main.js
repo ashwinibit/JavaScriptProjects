@@ -1,6 +1,6 @@
 
 
-const listOfProjects = ['Project_01_Quote Generater','Project_02_Password Generator','Project_03_Timer']
+const listOfProjects = ['Project_1_Quote Generater','Project_2_Password Generator','Project_3_Timer']
 
 for (let i = 0; i<listOfProjects.length;i++){
     const projectItem = document.createElement("div");
