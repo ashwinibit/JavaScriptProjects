@@ -1,6 +1,12 @@
 
-
-const listOfProjects = ['Project_1_Quote Generater','Project_2_Password Generator','Project_3_Timer']
+fetch("js/projectList.json")
+  .then(function (response) {
+    return response.json();
+  })
+  .then(function (data) {
+    console.log(Object.values(data));
+    const listOfProjects = Object.values(data)
+ 
 
 for (let i = 0; i<listOfProjects.length;i++){
     const projectItem = document.createElement("div");
@@ -17,7 +23,7 @@ for (let i = 0; i<listOfProjects.length;i++){
     const pit = document.createElement("div");
     pit.className = 'project-item-title';
     
-    const projectName = document.createTextNode(listOfProjects[i].split("_")[2]);
+    const projectName = document.createTextNode(listOfProjects[i]);
 
     pit.appendChild(projectName);
     linkContain.appendChild(pib);
@@ -27,3 +33,4 @@ for (let i = 0; i<listOfProjects.length;i++){
 }
 
 
+})
