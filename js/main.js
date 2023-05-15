@@ -4,7 +4,7 @@ fetch("js/projectList.json")
     return response.json();
   })
   .then(function (data) {
-    console.log(Object.values(data));
+    // console.log(Object.values(data));
     const listOfProjects = Object.values(data)
  
 
@@ -15,7 +15,8 @@ for (let i = 0; i<listOfProjects.length;i++){
     const linkContain = document.createElement("a");
     linkContain.className = 'project-item-link';
     linkContain.target = '_blank';
-    linkContain.href = listOfProjects[i];
+    let a = i + 1
+    linkContain.href = 'Project_'+a+'_'+listOfProjects[i];
 
     const pib = document.createElement("div");
     pib.className = 'project-item-bg';
