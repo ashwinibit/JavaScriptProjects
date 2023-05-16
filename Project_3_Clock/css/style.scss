@@ -1,0 +1,26 @@
+*{
+    padding: 0;
+    margin: 0;
+}
+
+body{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+#hour,
+    #minute,
+    #second{
+        position: absolute;
+        background-color: black;
+        border-radius: 10px;
+        transform-origin: bottom;
+    }  
+
+.analogClock{
+    width: 150px;
+    height: 150px;
+    background-color: aqua;
+}
