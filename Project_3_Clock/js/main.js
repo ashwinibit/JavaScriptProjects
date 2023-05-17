@@ -7,7 +7,7 @@ function digitalClock(){
     let d = today.getDay();
 
     document.getElementById('digitalClock').innerHTML = h + ":" + m + ":" + s;
-    setTimeout(getTodayTime, 1000)
+    setTimeout(digitalClock, 1000)
 }
 
 function analogClock(){
@@ -18,5 +18,5 @@ function analogClock(){
     let d = today.getDay();
 }
 
-analogClock()
-// digitalClock()
+// analogClock()
+digitalClock()
