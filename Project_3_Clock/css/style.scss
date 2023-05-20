@@ -17,9 +17,51 @@ body{
     font-family: 'Dancing Script', cursive;
 }
 
+.text {
+    font-size: 23px;
+    color: #494949;
+}
 
+.toggle {
+    position: relative;
+    width: 40px;
+    height: 20px;
+    border: 2px solid #494949;
+    border-radius: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    transition: .3s;
+}
+
+.circle {
+    position: absolute;
+    left: 0;
+    width: 20px;
+    height: 20px;
+    border-radius: 20px;
+    background-color: #494949;
+    transition: .3s;
+}
+
+.active {
+    border-color: rgb(85, 227, 180);
+}
+
+.active .circle {
+    left: 100%;
+    transform: translateX(-100%);
+    transition: .3s;
+    background-color: rgb(85, 227, 180);
+}
+
+.shDis{
+    display: block !important;
+}
 
 .digitalClock{
+    display: none;
     width: calc(30%);
     text-align: center;
     user-select: none;
@@ -32,6 +74,7 @@ body{
 }
 
 .analogClock{
+    display: none;
     position: relative;
     margin: auto;
     height: 40vh;

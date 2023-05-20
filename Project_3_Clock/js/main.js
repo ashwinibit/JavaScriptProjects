@@ -1,3 +1,26 @@
+let active = false
+function toggle() {
+    
+    let toggle = document.querySelector('.toggle')
+    let digClock = document.querySelector('.digitalClock')
+    let anaClock = document.querySelector('.analogClock')
+    let text = document.querySelector('.text')
+    active = !active
+    if (active) {
+        toggle.classList.add('active')
+        digClock.classList.add('shDis')
+        anaClock.classList.remove('shDis')
+        text.innerHTML = 'N'
+        toggle.classList.add
+    } else {
+        toggle.classList.remove('active')
+        anaClock.classList.add('shDis')
+        digClock.classList.remove('shDis')
+        text.innerHTML = 'FF'
+
+    }
+}
+
 
 function digitalClock(){
     const today = new Date();
@@ -38,6 +61,6 @@ function analogClock(){
     document.getElementById('second').style.transform = `rotate(${sRotation}deg)`;
     setTimeout(analogClock, 1000)
 }
-
+toggle()
 analogClock()
 digitalClock()
