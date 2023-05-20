@@ -30,7 +30,14 @@ function analogClock(){
     let m = today.getMinutes();
     let s = today.getSeconds();
     let d = today.getDay();
+    let hRotation = 30 * h + m / 2;
+    let mRotation = 6 * m;
+    let sRotation = 6 * s;
+    document.getElementById('hour').style.transform = `rotate(${hRotation}deg)`;
+    document.getElementById('minute').style.transform = `rotate(${mRotation}deg)`;
+    document.getElementById('second').style.transform = `rotate(${sRotation}deg)`;
+    setTimeout(analogClock, 1000)
 }
 
-// analogClock()
+analogClock()
 digitalClock()
