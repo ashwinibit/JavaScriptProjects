@@ -10,13 +10,13 @@ function toggle() {
         toggle.classList.add('active')
         digClock.classList.add('shDis')
         anaClock.classList.remove('shDis')
-        text.innerHTML = 'N'
+        text.innerHTML = 'Digital'
         toggle.classList.add
     } else {
         toggle.classList.remove('active')
         anaClock.classList.add('shDis')
         digClock.classList.remove('shDis')
-        text.innerHTML = 'FF'
+        text.innerHTML = 'Analog'
 
     }
 }

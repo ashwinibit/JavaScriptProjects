@@ -8,18 +8,21 @@
     <title>Clock</title>
 </head>
 <body>
+    
+    <div class="clockContainer">
+        <div class="digitalClock" id="digitalClock"></div>
+        <div class="analogClock" id="analogClock">
+            <div class="hour" id="hour"></div>
+            <div class="minute" id="minute"></div>
+            <div class="second" id="second"></div>
+        </div>
+    </div>
     <div class="container">
         <div class="toggle" onclick="toggle()">
             <div class="circle"></div>
         </div>
-        <span class="text">FF</span>
-    </div>
-    
-    <div class="digitalClock" id="digitalClock"></div>
-    <div class="analogClock" id="analogClock">
-        <div class="hour" id="hour"></div>
-        <div class="minute" id="minute"></div>
-        <div class="second" id="second"></div>
+        
+        <span class="text">Analog</span>
     </div>
     <script src="./js/main.js"></script>
 </body>
