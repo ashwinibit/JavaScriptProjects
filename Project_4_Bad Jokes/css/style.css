@@ -31,6 +31,13 @@ main .container {
   border-radius: 25px;
   width: 75%;
 }
+main .container .titleData {
+  font-size: 2.5rem;
+  font-weight: bold;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+          user-select: none;
+}
 main .container .jokePart {
   margin-top: 20px;
   padding: 10px;
@@ -42,21 +49,31 @@ main .container .buttenContainer {
   padding: 20px;
 }
 main .container .buttenContainer button {
+  font-family: "Caveat", cursive;
+  font-family: "Dancing Script", cursive;
   width: 150px;
   height: 50px;
   font-size: 1.2rem;
   border-style: none;
   border-radius: 15px;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+          user-select: none;
 }
 
 .loader {
   position: absolute;
-  width: 120px;
-  height: 120px;
+  width: 200px;
+  height: 200px;
   background-image: url(../img/mochi-peach.gif);
   background-size: contain;
+  z-index: 1;
 }
 
 .hide-loader {
   display: none;
+}
+
+.addBlur {
+  filter: blur(5px);
 }/*# sourceMappingURL=style.css.map */
