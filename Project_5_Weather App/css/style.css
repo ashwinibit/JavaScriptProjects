@@ -12,4 +12,12 @@ body {
   font-family: "Dancing Script", cursive;
   display: grid;
   place-items: center;
+  height: 100vh;
+}
+
+main {
+  background-color: aqua;
+  width: 150px;
+  height: 150px;
+  border-radius: 25px;
 }/*# sourceMappingURL=style.css.map */
