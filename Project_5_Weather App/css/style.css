@@ -17,7 +17,26 @@ body {
 
 main {
   background-color: aqua;
-  width: 150px;
-  height: 150px;
   border-radius: 25px;
+}
+
+.searchBar {
+  padding: 20px;
+}
+.searchBar .search {
+  width: 100px;
+  height: 100px;
+  margin: 40px auto 0;
+  background-color: black;
+  position: relative;
+  overflow: hidden;
+  transition: ease-in-out 0.4s;
+}
+.searchBar.open {
+  width: 420px;
+}
+.searchBar.open::before {
+  height: 60px;
+  margin: 20px 0 20px 30px;
+  position: absolute;
 }/*# sourceMappingURL=style.css.map */
