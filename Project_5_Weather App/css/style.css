@@ -32,6 +32,15 @@ main {
   overflow: hidden;
   transition: ease-in-out 0.4s;
 }
+.searchBar::before {
+  content: "";
+  display: block;
+  width: 3px;
+  height: 100%;
+  position: relative;
+  background-color: red;
+  transition: ease-in-out 0.4s;
+}
 .searchBar.open {
   width: 420px;
 }

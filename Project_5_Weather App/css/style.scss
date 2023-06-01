@@ -34,6 +34,15 @@ main{
         overflow: hidden;
         transition: ease-in-out .4s ;
     }
+    &::before{
+        content: '';
+        display: block;
+        width: 3px;
+        height: 100%;
+        position: relative;
+        background-color: red;
+        transition: ease-in-out .4s;
+    }
     &.open{
         width: 420px;
         &::before{
