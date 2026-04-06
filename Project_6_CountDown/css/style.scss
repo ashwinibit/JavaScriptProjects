@@ -1,0 +1,24 @@
+@import url('https://fonts.googleapis.com/css2?family=Caveat:wght@400..700&display=swap');
+
+*{
+    padding: 0;
+    margin: 0;
+}
+
+html,body{
+    background-color: #191d2b;
+    transition: all .4s ease-in-out;
+    font-family: 'Caveat', cursive;
+    font-family: 'Dancing Script', cursive;
+}
+
+
+.main{
+    display: grid;
+    background-color: aqua;
+    width: calc(50%);
+    height: calc(50vh);
+    .inp{
+        background-color: red;
+    }   
+}

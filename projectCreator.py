@@ -6,19 +6,23 @@ def createJsonFile(a):
     newDict = {}
     for i in a:
         newDict[i[1]] = i[2]
+    tempVar1 = os.path.dirname(os.path.abspath(__file__))
     print(newDict)
-    with open("./js/projectList.json", "w") as fp:
+    with open(tempVar1+"/js/projectList.json", "w") as fp:
         json.dump(newDict, fp, indent=4)
 
 
 def createProjectStrurcture(projectName):
-    os.mkdir(os.path.join(".",projectName))
-    os.mkdir(os.path.join("./"+projectName,'css'))
-    os.mkdir(os.path.join("./"+projectName,'js'))
-    os.mkdir(os.path.join("./"+projectName,'img'))
-    cssFile = "./"+projectName+'/css/style.scss'
-    jssFile = "./"+projectName+'/js/main.js'
-    htmlFile = "./"+projectName+'/index.html'
+    tempVar1 = os.path.dirname(os.path.abspath(__file__))
+    # print("hello")
+    # print(tempVar1)
+    os.mkdir(os.path.join(str(tempVar1+"/"),projectName))
+    os.mkdir(os.path.join(tempVar1+"/"+projectName,'css'))
+    os.mkdir(os.path.join(tempVar1+"/"+projectName,'js'))
+    os.mkdir(os.path.join(tempVar1+"/"+projectName,'img'))
+    cssFile = tempVar1+"/"+projectName+'/css/style.scss'
+    jssFile = tempVar1+"/"+projectName+'/js/main.js'
+    htmlFile = tempVar1+"/"+projectName+'/index.html'
     fileList = [cssFile, jssFile, htmlFile]
 
     for i in fileList:
@@ -28,7 +32,9 @@ def createProjectStrurcture(projectName):
 
 
 def getProjectNumber():
-    listOfFilesInFolder = os.listdir(".")
+
+    listOfFilesInFolder = os.listdir(os.path.dirname(os.path.abspath(__file__)))
+    # print(listOfFilesInFolder)
     listOfProjects = []
     listOfProjectsNumber = []
     for i in listOfFilesInFolder:
@@ -37,13 +43,15 @@ def getProjectNumber():
     for i in listOfProjects:
         listOfProjectsNumber.append(i.split('_'))
     
-    listOfProjectsNumber = sorted(listOfProjectsNumber,key = itemgetter(1))
+    listOfProjectsNumber = sorted(listOfProjectsNumber,key = itemgetter(0))
+    # print(listOfProjectsNumber)
     return listOfProjectsNumber
 
 
 def main():
     projectName = input("Enter the project Name : ")
     a = getProjectNumber()
+    # print(a)
     projectName ='Project_'+str(int(a[-1][1])+1)+'_'+projectName
     # print(projectName)
     a.append(projectName.split('_'))
