@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gym Checklist Tracker</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        :root {
+            --primary: #2563eb;
+            --success: #10b981;
+            --bg: #f8fafc;
+            --surface: #ffffff;
+            --text: #1e293b;
+            --border: #e2e8f0;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            background-color: var(--bg);
+            color: var(--text);
+            margin: 0;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        h1 { margin-bottom: 20px; text-align: center; }
+
+        /* Navigation Tabs */
+        .tabs {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 20px;
+            overflow-x: auto;
+            padding-bottom: 10px;
+            justify-content: center; /* Center tabs */
+        }
+
+        .tab-btn {
+            padding: 10px 16px;
+            border: none;
+            background: var(--surface);
+            border-radius: 20px;
+            cursor: pointer;
+            font-weight: 600;
+            color: #64748b;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+            transition: all 0.2s;
+            white-space: nowrap;
+        }
+
+        .tab-btn.active {
+            background: var(--primary);
+            color: white;
+            box-shadow: 0 4px 6px -1px rgba(37, 99, 235, 0.3);
+        }
+
+        /* Content Area */
+        .content {
+            display: flex;
+            flex-direction: column-reverse; /* Chart on top on mobile if desired, but we'll stick to standard */
+            gap: 20px;
+        }
+
+        @media (min-width: 768px) {
+            .content {
+                display: grid;
+                grid-template-columns: 2fr 1fr; /* Table left, Chart right */
+            }
+        }
+
+        .card {
+            background: var(--surface);
+            padding: 20px;
+            border-radius: 16px;
+            box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05);
+        }
+
+        /* Table Styles */
+        table { width: 100%; border-collapse: collapse; }
+        
+        th { 
+            text-align: center; 
+            padding: 12px; 
+            color: #64748b; 
+            font-size: 0.8rem; 
+            text-transform: uppercase;
+            border-bottom: 2px solid var(--border);
+        }
+
+        td {
+            padding: 12px 8px;
+            border-bottom: 1px solid var(--border);
+            vertical-align: middle;
+        }
+
+        td:first-child { 
+            text-align: left; 
+            font-weight: 500;
+            width: 40%;
+        }
+
+        td:not(:first-child) { text-align: center; }
+
+        /* Custom Large Checkbox */
+        input[type="checkbox"] {
+            appearance: none;
+            -webkit-appearance: none;
+            width: 24px;
+            height: 24px;
+            border: 2px solid #cbd5e1;
+            border-radius: 6px;
+            cursor: pointer;
+            position: relative;
+            transition: all 0.2s;
+        }
+
+        input[type="checkbox"]:checked {
+            background-color: var(--success);
+            border-color: var(--success);
+        }
+
+        input[type="checkbox"]:checked::after {
+            content: '✓';
+            position: absolute;
+            color: white;
+            font-size: 16px;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        /* Chart Area */
+        .chart-container {
+            position: relative;
+            height: 300px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .status-text {
+            text-align: center;
+            margin-top: 15px;
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: var(--text);
+        }
+
+        .reset-btn {
+            background-color: #ef4444;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 6px;
+            cursor: pointer;
+            margin-top: 20px;
+            font-size: 0.9rem;
+            width: 100%;
+        }
+
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>✅ Gym Checklist</h1>
+    
+    <div class="tabs" id="dayTabs">
+        </div>
+
+    <div class="content">
+        <div class="card">
+            <h2 id="currentDayTitle" style="margin-top:0;">Workout</h2>
+            <table id="workoutTable">
+                <thead>
+                    <tr>
+                        <th>Exercise</th>
+                        <th>Set 1</th>
+                        <th>Set 2</th>
+                        <th>Set 3</th>
+                    </tr>
+                </thead>
+                <tbody id="tableBody">
+                    </tbody>
+            </table>
+        </div>
+
+        <div class="card">
+            <h2 style="margin-top:0; text-align:center;">Daily Progress</h2>
+            <div class="chart-container">
+                <canvas id="progressChart"></canvas>
+            </div>
+            <div id="statusText" class="status-text">0% Complete</div>
+            <button class="reset-btn" onclick="clearDay()">🗑️ Clear Today's Data</button>
+        </div>
+    </div>
+</div>
+
+<script>
+    // --- 1. DATA ---
+    const gymData = {
+        "Monday": [
+            "Flat Bench Press", "Incline Bench Press", "Dips", "Dumbbell Fly", 
+            "Butterfly", "Dumbbell Press", "Chin-ups", "Lat Pulldown (22)", 
+            "T-Bar Row (24)", "Seated Cable Row (25)", "One-Arm Row (26)"
+        ],
+        "Tuesday": [
+            "Machine Arm Curl (7)", "Alternate Dumbbell Curl (8)", 
+            "Concentration Curl (10)", "Hammer Curl", "Barbell Curl",
+            "Squats", "Leg Press", "Leg Extension", "Leg Curl"
+        ],
+        "Wednesday": [
+            "Behind-Neck Press", "Military Press", "Dumbbell Press", 
+            "Shoulder Press Machine", "Shrugs (Collar)", 
+            "Front Raises", "Lateral Raises"
+        ],
+        "Thursday": [
+            "Cable Push Down (11)", "Behind-Neck Ext (16)", 
+            "Cable Overhead Ext (13)", "Tricep Kickbacks (14)", 
+            "Skull Crushers (15)", "Squats (Repeat)", "Leg Press (Repeat)"
+        ],
+        "Friday": [
+            "Flat Bench Press", "Incline Bench Press", "Dumbbell Fly", 
+            "Butterfly", "Dumbbell Press"
+        ],
+        "Saturday": [
+            "Bicep Curl Variant", "Tricep Extension Variant", "Wrist Curls"
+        ]
+    };
+
+    let currentDay = "Monday";
+    let myChart = null;
+
+    // --- 2. INITIALIZATION ---
+    document.addEventListener('DOMContentLoaded', () => {
+        renderTabs();
+        loadDay(currentDay);
+    });
+
+    // --- 3. RENDER TABS ---
+    function renderTabs() {
+        const tabContainer = document.getElementById('dayTabs');
+        tabContainer.innerHTML = '';
+        Object.keys(gymData).forEach(day => {
+            const btn = document.createElement('button');
+            btn.className = `tab-btn ${day === currentDay ? 'active' : ''}`;
+            btn.innerText = day;
+            btn.onclick = () => loadDay(day);
+            tabContainer.appendChild(btn);
+        });
+    }
+
+    // --- 4. LOAD DAY & TABLE ---
+    function loadDay(day) {
+        currentDay = day;
+        document.getElementById('currentDayTitle').innerText = day;
+        
+        // Update Tabs styling
+        document.querySelectorAll('.tab-btn').forEach(btn => {
+            btn.classList.toggle('active', btn.innerText === day);
+        });
+
+        // Build Table with Checkboxes
+        const tbody = document.getElementById('tableBody');
+        tbody.innerHTML = '';
+        
+        gymData[day].forEach((exercise) => {
+            let rowHtml = `<tr><td>${exercise}</td>`;
+            
+            // Create 3 checkboxes per exercise
+            for(let i=1; i<=3; i++) {
+                const isChecked = localStorage.getItem(`${day}_${exercise}_s${i}`) === 'true';
+                rowHtml += `
+                    <td>
+                        <input type="checkbox" 
+                            class="gym-check" 
+                            data-ex="${exercise}" 
+                            data-set="${i}" 
+                            ${isChecked ? 'checked' : ''}
+                            onchange="handleCheck(this)">
+                    </td>`;
+            }
+            rowHtml += `</tr>`;
+            tbody.innerHTML += rowHtml;
+        });
+
+        updateChart();
+    }
+
+    // --- 5. HANDLE CLICKS & SAVE ---
+    function handleCheck(checkbox) {
+        const exercise = checkbox.dataset.ex;
+        const set = checkbox.dataset.set;
+        const key = `${currentDay}_${exercise}_s${set}`;
+        
+        // Save to LocalStorage
+        localStorage.setItem(key, checkbox.checked);
+        
+        // Update Chart instantly
+        updateChart();
+    }
+
+    // --- 6. PIE CHART LOGIC ---
+    function updateChart() {
+        const totalSets = gymData[currentDay].length * 3; // Total possible checks
+        const checkedSets = document.querySelectorAll('#tableBody input[type="checkbox"]:checked').length;
+        const remainingSets = totalSets - checkedSets;
+        const percentage = Math.round((checkedSets / totalSets) * 100);
+
+        // Update Text
+        document.getElementById('statusText').innerText = `${percentage}% Complete`;
+
+        const ctx = document.getElementById('progressChart').getContext('2d');
+        
+        if (myChart) myChart.destroy();
+
+        myChart = new Chart(ctx, {
+            type: 'pie', // User requested Pie Chart
+            data: {
+                labels: ['Completed', 'Remaining'],
+                datasets: [{
+                    data: [checkedSets, remainingSets],
+                    backgroundColor: [
+                        '#10b981', // Green for Done
+                        '#e2e8f0'  // Grey for Remaining
+                    ],
+                    borderWidth: 0,
+                    hoverOffset: 4
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        position: 'bottom',
+                        labels: { padding: 20 }
+                    }
+                }
+            }
+        });
+    }
+
+    // --- 7. CLEAR DATA FUNCTION ---
+    function clearDay() {
+        if(confirm(`Are you sure you want to clear all data for ${currentDay}?`)) {
+            gymData[currentDay].forEach(ex => {
+                for(let i=1; i<=3; i++) {
+                    localStorage.removeItem(`${currentDay}_${ex}_s${i}`);
+                }
+            });
+            loadDay(currentDay); // Reload to clear checkboxes
+        }
+    }
+</script>
+
+</body>
+</html>
